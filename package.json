@@ -17,6 +17,8 @@
     "nodemon": "^3.0.1"
   },
   "dependencies": {
-    "@hapi/hapi": "^21.3.2"
+    "@hapi/hapi": "^21.3.2",
+    "dotenv": "^16.3.1",
+    "joi": "^17.11.0"
   }
 }

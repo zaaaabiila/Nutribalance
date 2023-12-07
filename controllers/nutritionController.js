@@ -1,43 +1,63 @@
-const dietagramApiService = require('../services/dietagramAPIService');
+const databaseService = require('../services/databaseService');
 
-async function getNutritionInfo(foodName) {
+exports.addNutritionData = async (request, h) => {
   try {
-    if (!foodName) {
-      throw new Error('Nama makanan harus disertakan dalam pencarian');
-    }
-    const dietagramData = await dietagramApiService.getFoodInfo(foodName);
+    const nutritionData = request.payload;
+    const documentId = await databaseService.addNutritionData(nutritionData);
 
-    if (!dietagramData || dietagramData.length === 0) {
-      throw new Error('Informasi nutrisi untuk makanan ini tidak tersedia.');
-    }
-
-    const nutritionInfo = dietagramData.map((item) => ({
-      calories: item.calories,
-      protein: item.protein,
-      fat: item.fat,
-      carbohydrates: item.carbohydrates,
-    }));
-
-    return nutritionInfo;
+    return h.response({ documentId, message: 'Data nutrisi makanan berhasil ditambahkan.' }).code(201);
   } catch (error) {
-    console.error('Error in getNutritionInfo:', error.message);
-
-    if (error.message.includes('Nama makanan harus disertakan dalam pencarian')) {
-      const errorObject = new Error('Nama makanan harus disertakan dalam pencarian.');
-      errorObject.statusCode = 400;
-      throw errorObject;
-    }
-
-    if (error.message.includes('Informasi nutrisi untuk makanan ini tidak tersedia.')) {
-      const errorObject = new Error('Informasi nutrisi untuk makanan ini tidak tersedia.');
-      errorObject.statusCode = 404;
-      throw errorObject;
-    }
-
-    const errorObject = new Error('Terjadi kesalahan saat memuat informasi nutrisi.');
-    errorObject.statusCode = 500;
-    throw errorObject;
+    console.error('Error adding nutrition data:', error);
+    return h.response({
+      statusCode: 500,
+      error: 'Internal Server Error',
+      message: `Gagal menambahkan data nutrisi makanan ke Firestore: ${error.message}`,
+    }).code(500);
   }
-}
+};
 
-module.exports = { getNutritionInfo };
+exports.getNutritionsByName = async (request, h) => {
+  try {
+    const { foodName } = request.query;
+    const nutritions = await databaseService.getNutritionsByName(foodName);
+    return h.response(nutritions).code(200);
+  } catch (error) {
+    console.error(error);
+    return h.response({
+      statusCode: 500,
+      error: 'Internal Server Error',
+      message: error.message,
+    }).code(500);
+  }
+};
+
+exports.updateNutritionData = async (request, h) => {
+  try {
+    const { nutritionId } = request.params;
+    const updatedData = request.payload;
+    await databaseService.updateNutritionData(nutritionId, updatedData);
+    return h.response().code(204);
+  } catch (error) {
+    console.error(error);
+    return h.response({
+      statusCode: 500,
+      error: 'Internal Server Error',
+      message: error.message,
+    }).code(500);
+  }
+};
+
+exports.deleteNutritionData = async (request, h) => {
+  try {
+    const { nutritionId } = request.params;
+    await databaseService.deleteNutritionData(nutritionId);
+    return h.response().code(204);
+  } catch (error) {
+    console.error(error);
+    return h.response({
+      statusCode: 500,
+      error: 'Internal Server Error',
+      message: error.message,
+    }).code(500);
+  }
+};

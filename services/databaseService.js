@@ -26,7 +26,7 @@ exports.getAllNutritions = async () => {
   }
 };
 
-exports.getNutritionsByName = async (foodName) => {
+exports.searchNutritionsByName = async (foodName) => {
   try {
     const snapshot = await firestore
       .collection('nutritions')
@@ -36,13 +36,28 @@ exports.getNutritionsByName = async (foodName) => {
 
     const nutritions = [];
     snapshot.forEach((doc) => {
-      nutritions.push(doc.data());
+      const nutritionData = doc.data();
+      nutritionData.id = doc.id;
+      nutritions.push(nutritionData);
     });
 
     return nutritions;
   } catch (error) {
-    console.error('Error fetching nutritions by name:', error);
-    throw new Error('Gagal mendapatkan data nutrisi makanan dari Firestore');
+    console.error('Error searching nutritions by name:', error);
+    throw new Error('Failed to search nutrition data from Firestore');
+  }
+};
+
+exports.getNutritionById = async (nutritionId) => {
+  try {
+    const snapshot = await firestore.collection('nutritions').doc(nutritionId).get();
+    if (snapshot.exists) {
+      return snapshot.data();
+    }
+    return null;
+  } catch (error) {
+    console.error('Error getting nutrition data by ID:', error);
+    throw new Error('Failed to get nutrition data by ID from Firestore');
   }
 };
 

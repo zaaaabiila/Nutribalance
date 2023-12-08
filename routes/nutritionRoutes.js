@@ -1,11 +1,18 @@
 const Joi = require('joi');
-const nutritionController = require('../controllers/nutritionController');
+const {
+  addNutritionData,
+  getAllNutritions,
+  searchNutritionsByName,
+  updateNutritionData,
+  deleteNutritionData,
+  getNutritionById,
+} = require('../controllers/nutritionController');
 
 module.exports = [
   {
     method: 'POST',
-    path: '/api/nutritions',
-    handler: nutritionController.addNutritionData,
+    path: '/nutritions',
+    handler: addNutritionData,
     options: {
       validate: {
         payload: Joi.object({
@@ -18,16 +25,36 @@ module.exports = [
       },
     },
   },
+
   {
     method: 'GET',
-    path: '/api/nutritions/search',
-    handler: nutritionController.getNutritionsByName,
+    path: '/nutritions',
+    handler: getAllNutritions,
+  },
+
+  {
+    method: 'GET',
+    path: '/nutritions/search',
+    handler: searchNutritionsByName,
+    options: {
+      validate: {
+        query: Joi.object({
+          foodName: Joi.string().required(),
+        }),
+      },
+    },
+  },
+
+  {
+    method: 'GET',
+    path: '/nutritions/{nutritionId}',
+    handler: getNutritionById,
   },
 
   {
     method: 'PUT',
-    path: '/api/nutritions/{nutritionId}',
-    handler: nutritionController.updateNutritionData,
+    path: '/nutritions/{nutritionId}',
+    handler: updateNutritionData,
     options: {
       validate: {
         payload: Joi.object({
@@ -43,7 +70,7 @@ module.exports = [
 
   {
     method: 'DELETE',
-    path: '/api/nutritions/{nutritionId}',
-    handler: nutritionController.deleteNutritionData,
+    path: '/nutritions/{nutritionId}',
+    handler: deleteNutritionData,
   },
 ];

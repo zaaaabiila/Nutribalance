@@ -4,29 +4,6 @@ exports.addNutritionData = async (request, h) => {
   try {
     const nutritionData = request.payload;
 
-    const isValidFoodName = (foodName) => /^[a-zA-Z]+$/.test(foodName);
-
-    if (!isValidFoodName(nutritionData.foodName)) {
-      return h.response({
-        status: 'fail',
-        message: 'Masukkan nama makanan dengan huruf.',
-      }).code(400);
-    }
-
-    const isNumeric = (value) => typeof value === 'number' && !Number.isNaN(value) && Number.isFinite(value);
-
-    if (
-      !isNumeric(nutritionData.calories)
-  || !isNumeric(nutritionData.protein)
-  || !isNumeric(nutritionData.carbohydrates)
-  || !isNumeric(nutritionData.fat)
-    ) {
-      return h.response({
-        status: 'fail',
-        message: 'Masukkan nilai yang valid pada data nutrisi',
-      }).code(400);
-    }
-
     const documentId = await databaseService.addNutritionData(nutritionData);
 
     const addedNutrition = {
@@ -77,10 +54,10 @@ exports.getAllNutritions = async (request, h) => {
   }
 };
 
-exports.searchNutritionsByName = async (request, h) => {
+exports.getNutritionsByName = async (request, h) => {
   try {
     const { foodName } = request.query;
-    const nutritions = await databaseService.searchNutritionsByName(foodName);
+    const nutritions = await databaseService.getNutritionsByName(foodName);
 
     if (nutritions.length === 0) {
       return h.response({

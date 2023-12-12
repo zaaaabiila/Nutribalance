@@ -26,7 +26,7 @@ exports.getAllNutritions = async () => {
   }
 };
 
-exports.searchNutritionsByName = async (foodName) => {
+exports.getNutritionsByName = async (foodName) => {
   try {
     const snapshot = await firestore
       .collection('nutritions')

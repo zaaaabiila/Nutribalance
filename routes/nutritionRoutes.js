@@ -2,7 +2,7 @@ const Joi = require('joi');
 const {
   addNutritionData,
   getAllNutritions,
-  searchNutritionsByName,
+  getNutritionsByName,
   updateNutritionData,
   deleteNutritionData,
   getNutritionById,
@@ -35,7 +35,7 @@ module.exports = [
   {
     method: 'GET',
     path: '/nutritions/search',
-    handler: searchNutritionsByName,
+    handler: getNutritionsByName,
     options: {
       validate: {
         query: Joi.object({

@@ -1,13 +1,33 @@
 const databaseService = require('../services/databaseService');
+const cloudStorageService = require('../services/cloudStorageService');
+
+function getExtensionFromBuffer(imageBuffer) {
+  const mimeType = imageBuffer.toString('ascii', 0, 5);
+
+  switch (mimeType) {
+    case 'image/jpeg':
+      return 'jpg';
+    case 'image/png':
+      return 'png';
+    default:
+      throw new Error('Unsupported image format');
+  }
+}
 
 exports.addNutritionData = async (request, h) => {
   try {
     const nutritionData = request.payload;
+    const imageBuffer = request.payload.image.data;
+
+    const nameImage = `${nutritionData.id}_gambar.${getExtensionFromBuffer(imageBuffer)}`;
+
+    const imageUrl = await cloudStorageService.uploadImageToGCS(imageBuffer, nameImage);
 
     const documentId = await databaseService.addNutritionData(nutritionData);
 
     const addedNutrition = {
       id: documentId,
+      imageUrl,
     };
 
     return h.response({
@@ -37,6 +57,7 @@ exports.getAllNutritions = async (request, h) => {
       protein: nutrition.protein,
       carbohydrates: nutrition.carbohydrates,
       fat: nutrition.fat,
+      imageUrl: nutrition.imageUrl,
     }));
 
     return h.response({
@@ -73,6 +94,7 @@ exports.getNutritionsByName = async (request, h) => {
       protein: nutrition.protein,
       carbohydrates: nutrition.carbohydrates,
       fat: nutrition.fat,
+      imageUrl: nutrition.imageUrl,
     }));
 
     return h.response({
@@ -109,6 +131,7 @@ exports.getNutritionById = async (request, h) => {
       protein: nutrition.protein,
       carbohydrates: nutrition.carbohydrates,
       fat: nutrition.fat,
+      imageUrl: nutrition.imageUrl,
     };
 
     return h.response({

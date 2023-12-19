@@ -7,7 +7,7 @@ admin.initializeApp({
 });
 
 require('dotenv').config();
-const nutritionRoutes = require('./routes/nutritionRoutes');
+const nutritionRoutes = require('./routes/nutritionRoute');
 
 const init = async () => {
   const server = Hapi.server({

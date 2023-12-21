@@ -1,5 +1,4 @@
 const admin = require('firebase-admin');
-
 const { SecretManagerServiceClient } = require('@google-cloud/secret-manager');
 
 const projectId = 'nutribalance-project';
@@ -11,12 +10,22 @@ const getSecret = async (secretName) => {
   return version.payload.data.toString();
 };
 
-const serviceAccountString = await getSecret('service-account-key');
-const serviceAccount = JSON.parse(serviceAccountString);
+// Exporting a function to initialize Firebase
+exports.initializeFirebase = async () => {
+  try {
+    const serviceAccountString = await getSecret('service-account-key');
+    const serviceAccount = JSON.parse(serviceAccountString);
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+
+    console.log('Firebase initialized successfully');
+  } catch (error) {
+    console.error('Error initializing Firebase:', error);
+    throw new Error('Failed to initialize Firebase');
+  }
+};
 
 const firestore = admin.firestore();
 

@@ -12,17 +12,16 @@ const getSecret = async (secretName) => {
   return version.payload.data.toString();
 };
 
-const serviceAccountString = await getSecret('service-account-key');
-const serviceAccount = JSON.parse(serviceAccountString);
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
-
 require('dotenv').config();
 const nutritionRoutes = require('./routes/nutritionRoute');
 
 const init = async () => {
+  const serviceAccountString = await getSecret('service-account-key');
+  const serviceAccount = JSON.parse(serviceAccountString);
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+
   const server = Hapi.server({
     port: 3000,
     host: process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0',

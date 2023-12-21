@@ -3,10 +3,11 @@ package com.dicoding.appcapstone.remote
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import os api_key = os.getenv("API_KEY")
 
 class CalorieNinjaApiClient {
     private val BASE_URL = "https://api.calorieninjas.com/"
-    private val API_KEY = "07xtjoEQQLRL9fWB9Ik5XVLrKgTCN8Pi2aNRd8WK"
+    private val API_KEY = "API_KEY"
 
     private val client = OkHttpClient.Builder()
         .addInterceptor { chain ->

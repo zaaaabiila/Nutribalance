@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">NutriBalance</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_article">Article</string>
+    <string name="title_mealscan">Meal Scan</string>
+
+    <string name="article_today">Article Today</string>
+
+    <string name="logo">Logo</string>
+    <string name="hello_welcome">Hello, Welcome!</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="have_an_account">Already have an account?</string>
+    <string name="register_here">Register here</string>
+    <string name="login">Login</string>
+    <string name="register_account">Register</string>
+    <string name="create_a_new_account">Create a new account</string>
+    <string name="name">Name</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="register_succeed">Register Succeed!</string>
+    <string name="continue_login">Continue Login</string>
+    <string name="log_out">Log out</string>
+    <string name="pizza">Pizza</string>
+    <string name="title_values">Know The Nutrition Values</string>
+    <string name="no">NO</string>
+    <string name="yes">YES</string>
+    <string name="confirm_logout">Apakah yakin untuk keluar?</string>
+    <string name="signin">Sign In</string>
+</resources>

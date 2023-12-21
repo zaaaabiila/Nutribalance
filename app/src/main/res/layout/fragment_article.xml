@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.article.ArticleFragment"
+    android:padding="16dp">
+
+        <!-- Green square -->
+        <LinearLayout
+            android:id="@+id/greenSquare"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/green_square"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Meals Today"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- Space between green square and RecyclerView -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:layout_below="@id/greenSquare" />
+
+        <!-- FrameLayout to contain RecyclerView and ProgressBar -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/greenSquare">
+
+            <!-- RecyclerView to display the list of articles -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <!-- TextView to display when there is no internet connection -->
+            <!-- LinearLayout to contain TextView and Button -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <!-- TextView to display when there is no internet connection -->
+                <TextView
+                    android:id="@+id/noInternetTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No internet connection"
+                    android:textSize="24sp"
+                    android:visibility="gone" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:layout_below="@id/greenSquare" />
+
+                <!-- Refresh Button -->
+                <Button
+                    android:id="@+id/refreshButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Refresh"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#19B20C"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <!-- ProgressBar to display while data is loading -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+</RelativeLayout>
+
+
+

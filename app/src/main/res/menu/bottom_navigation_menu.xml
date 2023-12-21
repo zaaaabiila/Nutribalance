@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/articleFragment"
+        android:icon="@drawable/ic_action_article_white"
+        android:title="Article"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_action_home_filled_white"
+        android:title="Home"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/scanFragment"
+        android:icon="@drawable/ic_action_fastfood_white"
+        android:title="Scan"
+        app:showAsAction="ifRoom"/>
+</menu>

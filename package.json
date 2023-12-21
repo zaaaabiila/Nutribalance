@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@google-cloud/firestore": "^7.1.0",
+    "@google-cloud/secret-manager": "^5.0.1",
     "@google-cloud/storage": "^7.7.0",
     "@hapi/hapi": "^21.3.2",
     "dotenv": "^16.3.1",

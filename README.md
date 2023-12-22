@@ -6,10 +6,6 @@
   <strong>NutriBalance</strong>
 </h1>
 
-## About the Project
-
-Here is a paragraph about the project. You can replace this text with the actual content of your paragraph.
-
 ## Get Started
 /Note that the app is still in developing process. Expect limited Api Calls/
 

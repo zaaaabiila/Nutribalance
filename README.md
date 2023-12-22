@@ -32,7 +32,7 @@ NutriBalance aims to reduce the number of overweight individuals from 67.7 milli
 # Installation
 [NutriBalance Mobile Development Readme](https://github.com/zaaaabiila/Nutribalance/blob/mobile_development/README.md)
 
-[<img src="https://github.com/zaaaabiila/Nutribalance/blob/mobile_development/app/src/main/res/drawable/sampull.png" width="50%">](https://www.youtube.com/watch?v=gPyj6UmJgpg "Demonstration and Showcase")
+[<img src="https://github.com/zaaaabiila/Nutribalance/blob/mobile_development/app/src/main/res/drawable/sampull.png" width="50%">](https://youtu.be/rawt8xwwKqI "Demonstration and Showcase")
 
 - Screenshot Application
 <p align="left">
